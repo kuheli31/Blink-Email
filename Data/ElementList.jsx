@@ -10,12 +10,12 @@ export default [
         url: '#',
         style: {
             textAlign: 'center',
-            backgroundColor: '#007bff',
+            backgroundColor: '#FE4F2D',
             color: '#ffffff',
             padding: '10px',
             width: 'auto',
             fontSize: '16px',
-            borderRadius: '0px',
+            borderRadius: '10px',
             fontWeight: 'normal',
             objectFit: 'contain',
 
@@ -33,18 +33,14 @@ export default [
         label: 'Text',
         textarea: 'Sample Text',
         style: {
-            backgroundColor: '#fff',
+            backgroundColor: '',
             color: '#000000',
             padding: '10px',
             textAlign: 'center',
             fontSize: '22px',
             fontWeight: 'normal',
-            textTransform: 'uppercase'//lowercase , capitilized
         },
-        outerStyle: {
-            backgroundColor: '#fff',
-            width: '100%'
-        }
+        
     },
     {
         icon: Image,
@@ -73,14 +69,14 @@ export default [
         icon: Frame,
         type: 'Logo',
         label: 'Logo',
-        imageUrl: "/logo.svg",
+        imageUrl:"/logo1.svg",
         alt: 'logo',
-        url: '#',
+        url: '',
         style: {
             backgroundColor: '#ffffff',
             padding: '10px',
-            height: '30%',
-            width: '30%',
+            height: '50%',
+            width: '50%',
         },
         outerStyle: {
             display: 'flex',
@@ -115,7 +111,7 @@ export default [
         icon: SquareSplitVertical,
         type: 'Divider',
         label: 'Divider',
-        content: '',
+        content: '', 
         style: {
             color: '#000000',
             padding: '10px',
