@@ -12,7 +12,7 @@ function Editor(){
 
         <div className='grid grid-cols-5'>
         <ElementSidebar/>
-        <div className="col-span-3 bg-gray-100">
+        <div className="col-span-3 bg-orange-100">
             <Canvas/>
         </div>
         <Settings/>

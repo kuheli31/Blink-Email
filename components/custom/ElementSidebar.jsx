@@ -4,6 +4,7 @@ import Layout from "@/Data/Layout";
 import React from "react";
 import ElementLayoutCard from "./ElementLayoutCard";
 import ElementList from "@/Data/ElementList";
+import { useDragElementLayout } from "@/app/provider";
 
 function ElementSidebar(){
     const {dragElementLayout, setDragElementLayout} = useDragElementLayout();
@@ -11,6 +12,15 @@ function ElementSidebar(){
         setDragElementLayout({
             dragLayout:{
                 ...layout,
+                id:Date.now()
+            }
+        })
+    }
+
+    const onDragElementStart=(element)=>{
+        setDragElementLayout({
+            dragElement:{
+                ...element,
                 id:Date.now()
             }
         })
@@ -30,7 +40,9 @@ function ElementSidebar(){
             <h2 className='font-bold text-lg mt-6'>Elements</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-3">
                 {ElementList.map((element, index) => (
-                <ElementLayoutCard layout={element} key={index}/>
+                <div key={index} draggable onDragStart={()=>onDragElementStart(element)}>
+                <ElementLayoutCard layout={element}/>
+                </div>
                 ))}
             </div>
         </div>
