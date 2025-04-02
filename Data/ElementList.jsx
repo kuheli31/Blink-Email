@@ -1,4 +1,4 @@
-import { Columns2, Facebook, Frame, Framer, Image, Link2, PanelTop, Projector, RectangleEllipsis, SquareSplitVertical, Text, TextSelectionIcon, Twitter } from "lucide-react";
+import { Columns2, Facebook, Frame, Framer, Image, Link2, PanelTop, Projector, RectangleEllipsis, SquareSplitVertical, Text, TextSelectionIcon, Twitter, X } from "lucide-react";
 
 
 export default [
@@ -33,12 +33,13 @@ export default [
         label: 'Text',
         textarea: 'Sample Text',
         style: {
-            backgroundColor: '',
+            backgroundColor: '#FDFAF6',
             color: '#000000',
             padding: '10px',
             textAlign: 'center',
             fontSize: '22px',
             fontWeight: 'normal',
+            textTransform: 'uppercase'
         },
         
     },

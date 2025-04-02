@@ -1,13 +1,15 @@
 import React from 'react';
 
+function ButtonComponent({ style, content, url }) {
+    const handleClick = (event) => {
+        event.preventDefault();  // Prevent page reload
 
-function ButtonComponent({style,content,url}){
+    };
+
     return (
-            <div>
-            <a href={url}>
-                <button style={style}>{content}</button>
-            </a>
-            </div>
+        <div>
+            <button style={style} onClick={handleClick}>{content}</button>
+        </div>
     );
 }
 
