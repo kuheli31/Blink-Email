@@ -1,45 +1,58 @@
 "use client"
-import React from "react";
-import { useEmailTemplate, useScreenSize } from "@/app/provider";
-import { useDragElementLayout } from "@/app/provider";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useEmailTemplate, useScreenSize, useDragElementLayout } from "@/app/provider";
 import ColumnLayout from "../LayoutElements/ColumnLayout";
 
-function Canvas(){
-    const {screenSize , setScreenSize} = useScreenSize();
-    const {dragElementLayout, setDragElementLayout} = useDragElementLayout();
-    const {emailTemplate, setEmailTemplate} = useEmailTemplate();
-    const[dragOver , setDragOver] = useState(false);
+function Canvas({ viewHTMLCode, setHtmlCode }) {
+    const htmlRef = useRef();
+    const { screenSize } = useScreenSize();
+    const { dragElementLayout } = useDragElementLayout();
+    const { emailTemplate, setEmailTemplate } = useEmailTemplate();
+    const [dragOver, setDragOver] = useState(false);
 
-    const onDragOver=(e)=>{
+    const onDragOver = (e) => {
         e.preventDefault();
         setDragOver(true);
-        console.log('over...');
-    }
-    const onDropHandle=()=>{
+    };
+
+    const onDropHandle = () => {
         setDragOver(false);
-        if(dragElementLayout?.dragLayout){
-            setEmailTemplate(prev=>[...prev,dragElementLayout?.dragLayout])
+        if (dragElementLayout?.dragLayout) {
+            setEmailTemplate(prev => [...prev, dragElementLayout?.dragLayout]);
         }
-    }
+    };
 
-    const getLayoutComponent=(layout)=>{
-        if(layout?.type == 'column')
-        {
-            return <ColumnLayout layout={layout}/>
+    const getLayoutComponent = (layout) => {
+        if (layout?.type === 'column') {
+            return <ColumnLayout layout={layout} />;
         }
-    }
+    };
 
-    return(
+    useEffect(() => {
+        if (viewHTMLCode) {
+            generateHTMLCode();
+        }
+    }, [viewHTMLCode]);
+
+    const generateHTMLCode = () => {
+        if (htmlRef.current) {
+            const htmlContent = htmlRef.current.innerHTML;
+            setHtmlCode(htmlContent);  // Set the HTML content in state
+        }
+    };
+
+    return (
         <div className='mt-20 flex justify-center'>
-            <div className={`bg-white p-6 w-full 
-            ${screenSize === 'desktop' ? 'max-w-2xl' : 'max-w-md'}
-            ${dragOver && 'bg-orange-200 p-4'}`}
-            onDragOver={onDragOver}
-            onDrop={onDropHandle}
+            <div 
+                className={`bg-white p-6 w-full 
+                ${screenSize === 'desktop' ? 'max-w-2xl' : 'max-w-md'}
+                ${dragOver && 'bg-orange-200 p-4'}`}
+                onDragOver={onDragOver}
+                onDrop={onDropHandle}
+                ref={htmlRef}
             >
                 {emailTemplate?.length > 0 
-                    ? emailTemplate?.map((layout, index) => (
+                    ? emailTemplate.map((layout, index) => (
                         <div key={index}>
                             {getLayoutComponent(layout)}
                         </div>
@@ -48,7 +61,7 @@ function Canvas(){
                 }
             </div>
         </div>
-    )
+    );
 }
 
 export default Canvas;
