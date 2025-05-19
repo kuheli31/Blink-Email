@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayoutPanelLeft, SparkleIcon, WandSparkles } from "lucide-react";
 import AIinputBox from "@/components/custom/AIinputBox";
+import { Link } from "lucide-react";
 
 function CreateNew() {
-
   return (
     <div className="px-10 md:px-28 lg:px-64 xl:px-72 mt-20">
       <div className="flex items-center flex-col">
@@ -18,15 +18,20 @@ function CreateNew() {
         </p>
         <Tabs defaultValue="account" className="w-[500px] mt-10">
           <TabsList>
-            <TabsTrigger value="AI">Create with AI <WandSparkles className="h-5 w-5 ml-2"/></TabsTrigger>
-            <TabsTrigger value="SCRATCH">Begin From Scratch <LayoutPanelLeft className="h-5 w-5 ml-2"/></TabsTrigger>
+            <TabsTrigger value="AI">
+              Create with AI <WandSparkles className="h-5 w-5 ml-2" />
+            </TabsTrigger>
+            <TabsTrigger
+              value="SCRATCH"
+              onClick={() => (window.location.href = "/editor/1002")}
+            >
+              Begin From Scratch <LayoutPanelLeft className="h-5 w-5 ml-2" />
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="AI">
-            <AIinputBox/>
+            <AIinputBox />
           </TabsContent>
-          <TabsContent value="SCRATCH">
-            Change your password here.
-          </TabsContent>
+          <TabsContent value="SCRATCH"></TabsContent>
         </Tabs>
       </div>
     </div>

@@ -7,5 +7,13 @@ export default defineSchema({
     email: v.string(),
     picture: v.string(),
     credits: v.number(),
-  }).index("by_email", ["email"]), // ✅ Added indexing on email
+  }).index("by_email", ["email"]),
+
+  emailTemplates: defineTable({
+    tid: v.id("users"),
+    design: v.any(),
+    description: v.any(),
+    email: v.string(),
+  }).index("by_user", ["userId"]),
 });
+

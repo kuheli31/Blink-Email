@@ -18,17 +18,39 @@ function Provider({ children }) {
 
     //Checking if user is logged in or not
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const storage = JSON.parse(localStorage.getItem("userDetail"));
-            const emailTemplateStorage=JSON.parse(localStorage.getItem('emailTemplate'));
-            setEmailTemplate(emailTemplateStorage ?? []);
-            if (!storage?.email || !storage) {
-                //Redirect to homescreen
-            } else {
-                setUserDetail(storage);
+    if (typeof window !== "undefined") {
+        const userDetailRaw = localStorage.getItem("userDetail");
+        const emailTemplateRaw = localStorage.getItem("emailTemplate");
+
+        let storage = null;
+        let emailTemplateStorage = [];
+
+        try {
+            if (userDetailRaw && userDetailRaw !== "undefined") {
+                storage = JSON.parse(userDetailRaw);
             }
+        } catch (err) {
+            console.error("Error parsing userDetail:", err);
         }
-    }, []);
+
+        try {
+            if (emailTemplateRaw && emailTemplateRaw !== "undefined") {
+                emailTemplateStorage = JSON.parse(emailTemplateRaw);
+            }
+        } catch (err) {
+            console.error("Error parsing emailTemplate:", err);
+        }
+
+        setEmailTemplate(emailTemplateStorage ?? []);
+        if (!storage?.email || !storage) {
+            // Redirect to homescreen
+        } else {
+            setUserDetail(storage);
+        }
+    }
+}, []);
+
+
 
     useEffect(()=>{
         if(typeof window!== undefined)
